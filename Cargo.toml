@@ -1,0 +1,23 @@
+[package]
+name = "petit-filou"
+version = "0.0.1"
+authors = ["petit-chat"]
+description = "petit-filou searches for mp4 videos for a given wordpress website."
+documentation = "https://github.com/petit-chat/petit-filou"
+homepage = "https://github.com/petit-chat/petit-filou"
+repository = "https://github.com/petit-chat/petit-filou"
+keywords = ["wordpress", "mp4", "mp4-video-download", "scraper", "scraping"]
+categories = ["command-line-utilities", "asynchronous"]
+license = "GPL-3.0-or-later"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.5.2", features = ["derive"] }
+lazy_static = "1.4.0"
+reqwest = { version = "0.11", features = ["json"] }
+regex = "1.10.4"
+serde_json = "1.0"
+tokio = { version = "1", features = ["full"] }
+
+[dev-dependencies]
+mockito = "1.4.0"
