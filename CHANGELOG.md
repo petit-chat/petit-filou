@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2024-04-07
+
 ### Added
 
 - This Rust project.
@@ -16,3 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CONTRIBUTING file.
 - LICENSE file.
 - README containing documentation.
+
+[unreleased]: https://github.com/petit-chat/petit-filou/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/petit-chat/petit-filou/releases/tag/v0.1.0
