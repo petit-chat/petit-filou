@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question
+    about: You've come to seek help or want to discuss something related to petit-filou.
+    url: https://github.com/petit-chat/petit-filou/discussions/new
