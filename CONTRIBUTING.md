@@ -9,12 +9,12 @@ The following is a set of guidelines for contributing to petit-filou. These are 
 ### Reporting Bugs
 
 * Before creating bug reports, please check if the bug hasn't already been reported by searching through the [issues](https://github.com/petit-chat/petit-filou/issues).
-* If you're unable to find an open issue addressing the problem, [open a new issue](https://github.com/petit-chat/petit-filou/issues/new). Include as much detail as possible to help us reproduce the bug.
+* If you're unable to find an open issue addressing the problem, [open a new issue](https://github.com/petit-chat/petit-filou/issues/new/choose). Include as much detail as possible to help us reproduce the bug.
 
 ### Suggesting Enhancements
 
 * If you'd like to suggest an enhancement, you can also check the [issues](https://github.com/petit-chat/petit-filou/issues) to see if it's already been suggested.
-* If not, feel free to [open a new issue](https://github.com/petit-chat/petit-filou/issues/new) detailing your enhancement idea.
+* If not, feel free to [open a new issue](https://github.com/petit-chat/petit-filou/issues/new/choose) detailing your enhancement idea.
 
 ### Pull Requests
 
