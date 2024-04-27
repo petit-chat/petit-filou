@@ -1,6 +1,6 @@
 [package]
 name = "petit-filou"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["petit-chat"]
 description = "petit-filou searches for mp4 videos for a given wordpress website."
 documentation = "https://github.com/petit-chat/petit-filou"
