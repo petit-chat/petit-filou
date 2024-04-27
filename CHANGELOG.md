@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2024-04-25
+
+### Added
+
+- GitHub Actions Release build for `x86_64-unknown-linux-gnu`.
+
 ## [0.1.0] - 2024-04-07
 
 ### Added
@@ -19,5 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - LICENSE file.
 - README containing documentation.
 
-[unreleased]: https://github.com/petit-chat/petit-filou/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/petit-chat/petit-filou/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/petit-chat/petit-filou/releases/tag/v0.2.0
 [0.1.0]: https://github.com/petit-chat/petit-filou/releases/tag/v0.1.0
