@@ -1,54 +1,8 @@
-use clap::{Parser, ValueEnum};
+use clap::Parser;
+use petit_filou::args::{Cli, Mode};
 use petit_filou::{Config, Target};
 use std::collections::HashSet;
 use std::error::Error;
-
-#[derive(Parser)]
-#[command(author, version, about)]
-struct Cli {
-    /// Wordpress website base URL (e.g. https://domain.tld).
-    url: String,
-
-    /// Searching mode.
-    #[arg(value_enum)]
-    mode: Mode,
-
-    /// Result set published before a given ISO8601 compliant date.
-    #[arg(long)]
-    before: Option<String>,
-
-    /// Result set modified before a given ISO8601 compliant date.
-    #[arg(long)]
-    modified_before: Option<String>,
-
-    /// Result set published after a given ISO8601 compliant date.
-    #[arg(long)]
-    after: Option<String>,
-
-    /// Result set modified after a given ISO8601 compliant date.
-    #[arg(long)]
-    modified_after: Option<String>,
-
-    /// Ensures result set excludes specific IDs.
-    #[arg(short, long)]
-    exclude: Vec<u16>,
-
-    /// Ensures result set excludes specific categorie IDs.
-    #[arg(long)]
-    categories_exclude: Vec<u16>,
-
-    /// Ensures result set excludes to specific tag IDs.
-    #[arg(long)]
-    tags_exclude: Vec<u16>,
-}
-
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum)]
-enum Mode {
-    /// Fetch from posts only.
-    Fast,
-    /// Fetch from both posts and media.
-    Slow,
-}
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {

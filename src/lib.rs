@@ -1,3 +1,5 @@
+pub mod args;
+
 use std::collections::HashSet;
 
 pub struct Config {
