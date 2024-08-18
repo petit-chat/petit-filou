@@ -1,0 +1,147 @@
+name: Continuous Deployment
+
+on:
+  workflow_dispatch:
+
+jobs:
+  prepare-release:
+    name: Prepare Release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-bumped-version.outputs.version }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set Up git-cliff
+        uses: kenji-miyake/setup-git-cliff@v2
+
+      - name: Get Bumped Version
+        id: get-bumped-version
+        run: |
+          TAG=$(git cliff --bumped-version)
+          echo "VERSION=${TAG#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Generate Changelog
+        run: |
+          git cliff --bump --output CHANGELOG.md --no-exec --github-repo ${{ github.repository }}
+
+      - name: Update Version
+        env:
+          VERSION: ${{ steps.get-bumped-version.outputs.VERSION }}
+        run: |
+          sed -E -i "s/^version = \"[0-9\.]+\"$/version = \"${{ env.VERSION }}\"/" Cargo.toml
+          sed -E -i "s/^[0-9\.]+$/${{ env.VERSION }}/" README.md
+
+      - name: Commit Changes
+        env:
+          VERSION: ${{ steps.get-bumped-version.outputs.VERSION }}
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "actions[bot]"
+          git add Cargo.toml CHANGELOG.md README.md
+          git commit -m "chore(release): v${{ env.VERSION }}"
+          git push
+
+      - name: Generate Release Notes
+        run: |
+          git cliff --bump --unreleased --output RELEASE_NOTES.md --no-exec --github-repo ${{ github.repository }}
+
+      - name: Create Draft Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.get-bumped-version.outputs.VERSION }}
+        run: |
+          gh release create v${{ env.VERSION }} --draft --notes-file RELEASE_NOTES.md
+
+  build-and-upload-assets:
+    name: Build and Upload Assets
+    needs: prepare-release
+    env:
+      CARGO_TERM_COLOR: always
+      CARGO_INCREMENTAL: 0
+      ASSET_NAME: petit-filou-${{ needs.prepare-release.outputs.version }}-${{ matrix.rustc-target }}
+      VERSION: ${{ needs.prepare-release.outputs.version }}
+    permissions:
+      contents: write
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            rustc-target: x86_64-unknown-linux-gnu
+          - os: windows-latest
+            rustc-target: x86_64-pc-windows-gnu
+          - os: windows-latest
+            rustc-target: x86_64-pc-windows-msvc
+          - os: windows-latest
+            rustc-target: i686-pc-windows-msvc
+          - os: windows-latest
+            rustc-target: aarch64-pc-windows-msvc
+          - os: macos-latest
+            rustc-target: x86_64-apple-darwin
+          - os: macos-latest
+            rustc-target: aarch64-apple-darwin
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          target: ${{ matrix.rustc-target }}
+      
+      - name: Compile petit-filou
+        run: |
+          cargo build --verbose --release --locked --target  ${{ matrix.rustc-target }}
+
+      - name: Prepare Release Assets
+        shell: bash
+        run: |
+          mkdir -p r/{complete,doc}
+          cp {README.md,LICENSE} r/
+          cp CHANGELOG.md r/doc/
+          OUT_DIR=r/complete/ cargo run --bin generate-complete --locked --release
+          OUT_DIR=r/doc/ cargo run --bin generate-man --locked --release
+          mv r ${{ env.ASSET_NAME }}
+
+      - name: Archive and Upload Assets (Windows)
+        if: matrix.os == 'windows-latest'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          cp target/${{ matrix.rustc-target }}/release/{petit-filou.exe,generate-complete.exe,generate-man.exe} ${{ env.ASSET_NAME }}
+          7z a ${{ env.ASSET_NAME }}.zip ${{ env.ASSET_NAME }}
+          certutil -hashfile ${{ env.ASSET_NAME }}.zip SHA256 > ${{ env.ASSET_NAME }}.zip.sha256
+          gh release upload v${{ env.VERSION }} ${{ env.ASSET_NAME }}.zip#${{ matrix.rustc-target }} ${{ env.ASSET_NAME }}.zip.sha256#${{ matrix.rustc-target }}.sha256
+
+      - name: Archive and Upload Assets (Unix)
+        if: matrix.os != 'windows-latest'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cp target/${{ matrix.rustc-target }}/release/{petit-filou,generate-complete,generate-man} ${{ env.ASSET_NAME }}
+          tar czf ${{ env.ASSET_NAME }}.tar.gz ${{ env.ASSET_NAME }}
+          shasum -a 256 ${{ env.ASSET_NAME }}.tar.gz > ${{ env.ASSET_NAME }}.tar.gz.sha256
+          gh release upload v${{ env.VERSION }} ${{ env.ASSET_NAME }}.tar.gz#${{ matrix.rustc-target }} ${{ env.ASSET_NAME }}.tar.gz.sha256#${{ matrix.rustc-target }}.sha256
+
+  publish-release:
+    name: Publish Release
+    needs: [prepare-release, build-and-upload-assets]
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Publish Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release edit v${{ needs.prepare-release.outputs.version }} --draft=false
