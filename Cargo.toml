@@ -11,8 +11,18 @@ categories = ["command-line-utilities", "asynchronous"]
 license = "GPL-3.0-or-later"
 edition = "2021"
 
+[[bin]]
+name = "generate-complete"
+path = "src/gen/complete.rs"
+
+[[bin]]
+name = "generate-man"
+path = "src/gen/man.rs"
+
 [dependencies]
 clap = { version = "4.5.2", features = ["derive"] }
+clap_complete = "4.5.6"
+clap_mangen = "0.2.21"
 lazy_static = "1.4.0"
 reqwest = { version = "0.11", features = ["json"] }
 regex = "1.10.4"
