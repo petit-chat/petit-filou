@@ -34,8 +34,8 @@ $ petit-filou --version
 * `--modified-before <MODIFIED_BEFORE>`: Result set modified before a given ISO8601 compliant date.
 * `--after <AFTER>`: Result set published after a given ISO8601 compliant date.
 * `--modified-after <MODIFIED_AFTER>`: Result set modified after a given ISO8601 compliant date.
-* ` -e, --exclude <EXCLUDE>`: Ensures result set excludes specific IDs.
-* `--categories-exclude <CATEGORIES_EXCLUDE>`: Ensures result set excludes to specific categorie IDs.
+* `-e, --exclude <EXCLUDE>`: Ensures result set excludes specific IDs.
+* `--categories-exclude <CATEGORIES_EXCLUDE>`: Ensures result set excludes to specific category IDs.
 * `--tags-exclude <TAGS_EXCLUDE>`: Ensures result set excludes to specific tag IDs.
 * `-h, --help`: Print help.
 * `-V, --version`: Print version.
