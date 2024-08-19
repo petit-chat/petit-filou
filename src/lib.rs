@@ -43,11 +43,12 @@ pub async fn run(config: &Config) -> Result<HashSet<String>, reqwest::Error> {
                     .to_string()
             });
 
-        let json: serde_json::Value = response.json().await?;
+        let json = response.json::<serde_json::Value>().await?;
 
-        let urls = url::find(&client, &json).await?;
-
-        ret.extend(urls);
+        if let Some(array) = json.as_array() {
+            let urls = url::find(&client, &array.iter()).await?;
+            ret.extend(urls);
+        }
     }
 
     Ok(ret)
@@ -55,6 +56,8 @@ pub async fn run(config: &Config) -> Result<HashSet<String>, reqwest::Error> {
 
 mod url {
     use crate::{Config, Target};
+    use core::slice::Iter;
+    use serde_json::Value;
     use std::collections::HashSet;
 
     impl Target {
@@ -138,13 +141,13 @@ mod url {
 
     pub async fn find(
         client: &reqwest::Client,
-        value: &serde_json::Value,
+        value: &Iter<'_, Value>,
     ) -> Result<HashSet<String>, reqwest::Error> {
-        let parsers: Vec<fn(&serde_json::Value) -> HashSet<String>> =
+        let parsers: Vec<fn(Iter<'_, Value>) -> HashSet<String>> =
             vec![from::p0, from::p1, from::p2, from::p3];
 
         for parser in parsers {
-            let parsed_urls = parser(value);
+            let parsed_urls = parser(value.clone());
             if parsed_urls.is_empty() {
                 continue;
             }
@@ -175,8 +178,10 @@ mod url {
     }
 
     mod from {
+        use core::slice::Iter;
         use lazy_static::lazy_static;
         use regex::Regex;
+        use serde_json::Value;
         use std::collections::HashSet;
 
         lazy_static! {
@@ -193,22 +198,16 @@ mod url {
                 Regex::new(r"^(\d{4})-(\d{2})-\d{2}T\d{2}:\d{2}:\d{2}$").unwrap();
         }
 
-        pub(super) fn p0(value: &serde_json::Value) -> HashSet<String> {
+        pub(super) fn p0(value: Iter<'_, Value>) -> HashSet<String> {
             value
-                .as_array()
-                .into_iter()
-                .flatten()
                 .filter_map(|media| media["source_url"].as_str())
                 .filter(|&url| SRC_RE.is_match(url))
                 .map(|url| EXT_RE.replace(url, ".mp4").to_string())
                 .collect()
         }
 
-        pub(super) fn p1(value: &serde_json::Value) -> HashSet<String> {
+        pub(super) fn p1(value: Iter<'_, Value>) -> HashSet<String> {
             value
-                .as_array()
-                .into_iter()
-                .flatten()
                 .filter_map(|post| post["_embedded"]["wp:featuredmedia"].as_array())
                 .flatten()
                 .filter_map(|media| media["source_url"].as_str())
@@ -217,11 +216,8 @@ mod url {
                 .collect()
         }
 
-        pub(super) fn p2(value: &serde_json::Value) -> HashSet<String> {
+        pub(super) fn p2(value: Iter<'_, Value>) -> HashSet<String> {
             value
-                .as_array()
-                .into_iter()
-                .flatten()
                 .flat_map(|item| {
                     Some(
                         BODY_RE
@@ -235,11 +231,8 @@ mod url {
                 .collect()
         }
 
-        pub(super) fn p3(value: &serde_json::Value) -> HashSet<String> {
+        pub(super) fn p3(value: Iter<'_, Value>) -> HashSet<String> {
             value
-                .as_array()
-                .into_iter()
-                .flatten()
                 .filter_map(|item| {
                     let link = item["link"].as_str()?;
                     let date = item["date"].as_str()?;
@@ -286,7 +279,7 @@ mod url {
                     }
                 ]);
 
-                let urls = p0(&json_data);
+                let urls = p0(json_data.as_array().unwrap().iter());
 
                 assert_eq!(urls.len(), 3);
                 assert!(urls.contains("http://example.com/wp-content/uploads/2003/02/image.mp4"));
@@ -300,7 +293,7 @@ mod url {
                     }
                 ]);
 
-                let urls = p0(&json_data);
+                let urls = p0(json_data.as_array().unwrap().iter());
 
                 assert!(urls.is_empty());
             }
@@ -309,7 +302,7 @@ mod url {
             fn test_p0_handles_empty_json() {
                 let json_data = json!([{}]);
 
-                let urls = p0(&json_data);
+                let urls = p0(json_data.as_array().unwrap().iter());
 
                 assert!(urls.is_empty());
             }
@@ -355,7 +348,7 @@ mod url {
                     }
                 ]);
 
-                let urls = p1(&json_data);
+                let urls = p1(json_data.as_array().unwrap().iter());
 
                 assert_eq!(urls.len(), 5);
                 assert!(urls.contains("http://example.com/wp-content/uploads/2020/05/image2.mp4"));
@@ -372,7 +365,7 @@ mod url {
                     }
                 ]);
 
-                let urls = p1(&json_data);
+                let urls = p1(json_data.as_array().unwrap().iter());
 
                 assert!(urls.is_empty());
             }
@@ -391,7 +384,7 @@ mod url {
                     }
                 ]);
 
-                let urls = p1(&json_data);
+                let urls = p1(json_data.as_array().unwrap().iter());
 
                 assert!(urls.is_empty());
             }
@@ -410,7 +403,7 @@ mod url {
                     }
                 ]);
 
-                let urls = p1(&json_data);
+                let urls = p1(json_data.as_array().unwrap().iter());
 
                 assert!(urls.is_empty());
             }
@@ -445,7 +438,7 @@ mod url {
                     }
                 ]);
 
-                let urls = p2(&json_data);
+                let urls = p2(json_data.as_array().unwrap().iter());
 
                 assert_eq!(urls.len(), 5);
             }
@@ -463,7 +456,7 @@ mod url {
                     }
                 ]);
 
-                let urls = p2(&json_data);
+                let urls = p2(json_data.as_array().unwrap().iter());
 
                 assert!(urls.is_empty());
             }
@@ -472,7 +465,7 @@ mod url {
             fn test_p2_handles_empty_json() {
                 let json_data = json!([{}]);
 
-                let urls = p2(&json_data);
+                let urls = p2(json_data.as_array().unwrap().iter());
 
                 assert!(urls.is_empty());
             }
@@ -494,7 +487,7 @@ mod url {
                     }
                 ]);
 
-                let urls = p3(&json_data);
+                let urls = p3(json_data.as_array().unwrap().iter());
 
                 assert_eq!(urls.len(), 6);
                 assert!(
@@ -522,7 +515,7 @@ mod url {
                     }
                 ]);
 
-                let urls = p3(&json_data);
+                let urls = p3(json_data.as_array().unwrap().iter());
 
                 assert!(urls.is_empty());
             }
@@ -531,7 +524,7 @@ mod url {
             fn test_p3_handles_empty_json() {
                 let json_data = json!([{}]);
 
-                let urls = p3(&json_data);
+                let urls = p3(json_data.as_array().unwrap().iter());
 
                 assert!(urls.is_empty());
             }
@@ -733,7 +726,9 @@ mod url {
 
             let client = reqwest::Client::new();
 
-            let urls = find(&client, &json_data).await.unwrap();
+            let urls = find(&client, &json_data.as_array().unwrap().iter())
+                .await
+                .unwrap();
 
             mock.assert_async().await;
 
@@ -777,7 +772,9 @@ mod url {
 
             let client = reqwest::Client::new();
 
-            let urls = find(&client, &json_data).await.unwrap();
+            let urls = find(&client, &json_data.as_array().unwrap().iter())
+                .await
+                .unwrap();
 
             mock.assert_async().await;
 
@@ -814,7 +811,9 @@ mod url {
 
             let client = reqwest::Client::new();
 
-            let urls = find(&client, &json_data).await.unwrap();
+            let urls = find(&client, &json_data.as_array().unwrap().iter())
+                .await
+                .unwrap();
 
             mock.assert_async().await;
 
@@ -845,7 +844,9 @@ mod url {
 
             let client = reqwest::Client::new();
 
-            let urls = find(&client, &json_data).await.unwrap();
+            let urls = find(&client, &json_data.as_array().unwrap().iter())
+                .await
+                .unwrap();
 
             mock.assert_async().await;
 
@@ -897,7 +898,9 @@ mod url {
 
             let client = reqwest::Client::new();
 
-            let urls = find(&client, &json_data).await.unwrap();
+            let urls = find(&client, &json_data.as_array().unwrap().iter())
+                .await
+                .unwrap();
 
             m1.assert_async().await;
             m2.assert_async().await;
@@ -959,7 +962,9 @@ mod url {
 
             let client = reqwest::Client::new();
 
-            let urls = find(&client, &json_data).await.unwrap();
+            let urls = find(&client, &json_data.as_array().unwrap().iter())
+                .await
+                .unwrap();
 
             m1.assert_async().await;
             m2.assert_async().await;
@@ -974,7 +979,9 @@ mod url {
 
             let client = reqwest::Client::new();
 
-            let urls = find(&client, &json_data).await.unwrap();
+            let urls = find(&client, &json_data.as_array().unwrap().iter())
+                .await
+                .unwrap();
 
             assert!(urls.is_empty());
         }
@@ -989,7 +996,7 @@ mod url {
 
             let client = reqwest::Client::new();
 
-            let result = find(&client, &json_data).await;
+            let result = find(&client, &json_data.as_array().unwrap().iter()).await;
 
             assert!(result.is_err(), "Expected a network error result");
         }
