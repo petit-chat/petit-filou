@@ -2,7 +2,7 @@
 
 petit-filou is a command-line tool designed for retrieving mp4 videos from wordpress websites. petit-filou features a range of search options, allowing users to finely adjust their search criteria.
 
-[![Build status](https://github.com/petit-chat/petit-filou/actions/workflows/ci.yml/badge.svg)](https://github.com/petit-chat/petit-filou/actions)
+[![Build status](https://github.com/petit-chat/petit-filou/actions/workflows/ci.yaml/badge.svg)](https://github.com/petit-chat/petit-filou/actions)
 [![Continuous Deployment](https://github.com/petit-chat/petit-filou/actions/workflows/cd.yaml/badge.svg)](https://github.com/petit-chat/petit-filou/actions/workflows/cd.yaml)
 
 ## Installation
