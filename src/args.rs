@@ -30,7 +30,7 @@ pub struct Cli {
     #[arg(short, long)]
     pub exclude: Vec<u16>,
 
-    /// Ensures result set excludes specific categorie IDs.
+    /// Ensures result set excludes specific category IDs.
     #[arg(long)]
     pub categories_exclude: Vec<u16>,
 
