@@ -35,13 +35,21 @@ jobs:
           sed -E -i "s/^version = \"[0-9\.]+\"$/version = \"${{ env.VERSION }}\"/" Cargo.toml
           sed -E -i "s/^[0-9\.]+$/${{ env.VERSION }}/" README.md
 
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          
+      - name: Regenerate Lockfile
+        run: cargo generate-lockfile
+
       - name: Commit Changes
         env:
           VERSION: ${{ steps.get-bumped-version.outputs.VERSION }}
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "actions[bot]"
-          git add Cargo.toml CHANGELOG.md README.md
+          git add Cargo.toml Cargo.lock CHANGELOG.md README.md
           git commit -m "chore(release): v${{ env.VERSION }}"
           git push
 
@@ -88,6 +96,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
