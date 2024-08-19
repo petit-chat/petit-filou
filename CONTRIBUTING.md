@@ -29,8 +29,8 @@ The following is a set of guidelines for contributing to petit-filou. These are 
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [Code of Conduct](https://github.com/petit-chat/petit-filou/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
+This project and everyone participating in it is governed by the [Code of Conduct](https://github.com/petit-chat/petit-filou/blob/main/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the [GPLv3 License](https://github.com/petit-chat/petit-filou/LICENSE).
+By contributing, you agree that your contributions will be licensed under the [GPLv3 License](https://github.com/petit-chat/petit-filou/blob/main/LICENSE).
