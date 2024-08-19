@@ -1,6 +1,5 @@
 name: Bug Report
 description: An issue with petit-filou
-title: "[Bug]: "
 labels: ["bug", "triage"]
 body:
   - type: checkboxes

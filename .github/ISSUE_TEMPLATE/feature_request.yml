@@ -1,12 +1,11 @@
 name: Feature Request
 description: Suggest an idea for petit-filou
-title: "[Feat]: "
 labels: ["enhancement", "triage"]
 body:
   - type: checkboxes
     id: terms
     attributes:
-      label: Before submitting a bug repport
+      label: Before submitting a feature request
       options:
         - label: Check [discussions](https://github.com/petit-chat/petit-filou/discussions).
           required: true
