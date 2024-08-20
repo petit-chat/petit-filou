@@ -16,7 +16,7 @@ $ cd petit-filou
 $ cargo build --release
 $ mv ./target/release/petit-filou /usr/local/bin
 $ petit-filou --version
-0.3.0
+0.3.1
 ```
 
 ## Usage
