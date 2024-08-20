@@ -55,7 +55,7 @@ jobs:
 
       - name: Generate Release Notes
         run: |
-          git cliff --bump --unreleased --output RELEASE_NOTES.md --no-exec --github-repo ${{ github.repository }}
+          git cliff --bump --unreleased --strip header --output RELEASE_NOTES.md --no-exec --github-repo ${{ github.repository }}
 
       - name: Create Draft Release
         env:
