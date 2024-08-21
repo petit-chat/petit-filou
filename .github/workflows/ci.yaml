@@ -2,9 +2,9 @@ name: Continuous Integration
 
 on:
   pull_request:
+  push:
     branches:
-      - main
-  workflow_dispatch:
+      - "*"
 
 env:
   CARGO_TERM_COLOR: always
@@ -106,34 +106,7 @@ jobs:
 
       - name: Run Tarpaulin
         run: |
-          cargo tarpaulin --out xml --verbose --all-features
-
-      - name: Codecov
-        uses: codecov/codecov-action@v4
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        with:
-          fail_ci_if_error: true
-          file: cobertura.xml
-          verbose: true
-
-  msrv:
-    name: Check Minimum Supported Rust Version
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: stable
-
-      - name: Install msrv
-        run: cargo install cargo-msrv
-
-      - name: Run msrv
-        run: cargo msrv verify
+          cargo tarpaulin --exclude-files src/gen/* --all-features --coveralls ${{ secrets.COVERALLS_REPO_TOKEN }}
 
   typos:
     name: Check Typos

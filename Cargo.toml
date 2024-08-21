@@ -10,7 +10,6 @@ keywords = ["wordpress", "mp4", "mp4-video-download", "scraper", "scraping"]
 categories = ["command-line-utilities", "asynchronous"]
 license = "GPL-3.0-or-later"
 edition = "2021"
-rust-version = "1.74.1"
 
 [[bin]]
 name = "generate-complete"
