@@ -22,24 +22,52 @@ $ petit-filou --version
 
 ## Usage
 
-### Arguments
+```console
+$ petit-filou --help
+petit-filou searches for mp4 videos for a given wordpress website.
 
-* `<URL>`: Wordpress website base URL. This should be a valid URL starting with `http` or `https` and containing only the base URL (e.g. `https://domain.tld`).
-* `<MODE>`: Searching mode.
-  * `fast`: Retrieve video URLs from [posts](https://developer.wordpress.org/rest-api/reference/posts/#list-posts) only.
-  * `slow`: Retrieve video URLs from both [posts](https://developer.wordpress.org/rest-api/reference/posts/#list-posts) and [media](https://developer.wordpress.org/rest-api/reference/media/#list-media).
+Usage: petit-filou [OPTIONS] <URL> <MODE>
 
-### Options
+Arguments:
+  <URL>
+          Wordpress website base URL (e.g. https://domain.tld)
 
-* `--before <BEFORE>`: Result set published before a given ISO8601 compliant date.
-* `--modified-before <MODIFIED_BEFORE>`: Result set modified before a given ISO8601 compliant date.
-* `--after <AFTER>`: Result set published after a given ISO8601 compliant date.
-* `--modified-after <MODIFIED_AFTER>`: Result set modified after a given ISO8601 compliant date.
-* `-e, --exclude <EXCLUDE>`: Ensures result set excludes specific IDs.
-* `--categories-exclude <CATEGORIES_EXCLUDE>`: Ensures result set excludes to specific category IDs.
-* `--tags-exclude <TAGS_EXCLUDE>`: Ensures result set excludes to specific tag IDs.
-* `-h, --help`: Print help.
-* `-V, --version`: Print version.
+  <MODE>
+          Searching mode
+
+          Possible values:
+          - fast: Fetch from posts only
+          - slow: Fetch from both posts and media
+
+Options:
+      --before <BEFORE>
+          Result set published before a given ISO8601 compliant date
+
+      --modified-before <MODIFIED_BEFORE>
+          Result set modified before a given ISO8601 compliant date
+
+      --after <AFTER>
+          Result set published after a given ISO8601 compliant date
+
+      --modified-after <MODIFIED_AFTER>
+          Result set modified after a given ISO8601 compliant date
+
+  -e, --exclude <EXCLUDE>
+          Ensures result set excludes specific IDs
+
+      --categories-exclude <CATEGORIES_EXCLUDE>
+          Ensures result set excludes specific category IDs
+
+      --tags-exclude <TAGS_EXCLUDE>
+          Ensures result set excludes to specific tag IDs
+
+  -h, --help
+          Print help (see a summary with '-h')
+
+  -V, --version
+          Print version
+
+```
 
 ## Examples
 
