@@ -1,0 +1,22 @@
+[package]
+name = "pf_lib"
+version = "1.0.0"
+authors = ["petit-chat"]
+description = "petit-filou core library"
+documentation = "https://github.com/petit-chat/petit-filou"
+homepage = "https://github.com/petit-chat/petit-filou"
+repository = "https://github.com/petit-chat/petit-filou"
+keywords = ["wordpress", "mp4", "mp4-video-download", "scraper", "scraping"]
+categories = ["api-bindings"]
+license = "GPL-3.0-or-later"
+edition = "2021"
+
+[dependencies]
+lazy_static = "1.4.0"
+log.workspace = true
+reqwest = { version = "0.11", features = ["blocking", "json"] }
+regex = "1.10.4"
+serde_json = "1.0"
+
+[dev-dependencies]
+mockito = "1.4.0"
