@@ -1,0 +1,25 @@
+[package]
+name = "pf_cli"
+version = "1.0.0"
+authors = ["petit-chat"]
+description = "petit-filou searches for mp4 videos for a given wordpress website"
+documentation = "https://github.com/petit-chat/petit-filou"
+homepage = "https://github.com/petit-chat/petit-filou"
+repository = "https://github.com/petit-chat/petit-filou"
+keywords = ["wordpress", "mp4", "mp4-video-download", "scraper", "scraping"]
+categories = ["command-line-utilities"]
+license = "GPL-3.0-or-later"
+edition = "2021"
+
+[[bin]]
+name = "pf"
+path = "src/main.rs"
+
+[dependencies]
+log.workspace = true
+pf_lib = { path = "../pf_lib" }
+clap = { version = "4.5.2", features = ["derive"] }
+env_logger = "0.11.5"
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(tarpaulin_include)'] }

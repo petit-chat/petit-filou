@@ -1,39 +1,17 @@
-[package]
-name = "petit-filou"
-version = "0.3.1"
-authors = ["petit-chat"]
-description = "petit-filou searches for mp4 videos for a given wordpress website."
-documentation = "https://github.com/petit-chat/petit-filou"
-homepage = "https://github.com/petit-chat/petit-filou"
-repository = "https://github.com/petit-chat/petit-filou"
-keywords = ["wordpress", "mp4", "mp4-video-download", "scraper", "scraping"]
-categories = ["command-line-utilities", "asynchronous"]
-license = "GPL-3.0-or-later"
-edition = "2021"
+[workspace]
+resolver = "2"
+members = ["pf_cli", "pf_lib"]
 
-[[bin]]
-name = "generate-completions"
-path = "src/gen/completions.rs"
-
-[[bin]]
-name = "generate-man"
-path = "src/gen/man.rs"
-
-[dependencies]
-clap = { version = "4.5.2", features = ["derive"] }
-clap_complete = "4.5.6"
-clap_mangen = "0.2.21"
-lazy_static = "1.4.0"
-reqwest = { version = "0.11", features = ["json"] }
-regex = "1.10.4"
-serde_json = "1.0"
-tokio = { version = "1", features = ["full"] }
-
-[dev-dependencies]
-mockito = "1.4.0"
+[workspace.dependencies]
+log = "0.4.22"
 
 [profile.release]
-lto = true
-codegen-units = 1
-incremental = false
+opt-level = 3
+debug = "none"
 strip = "symbols"
+debug-assertions = false
+overflow-checks = false
+lto = true
+panic = "abort"
+incremental = false
+codegen-units = 1

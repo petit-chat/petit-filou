@@ -2,67 +2,81 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.3.1](https://github.com/petit-chat/petit-filou/compare/v0.3.0..v0.3.1) - 2024-08-20
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-### 🐛 Bug Fixes
+## [Unreleased]
 
-- *(args)* Category typo - ([7b9d6fb](https://github.com/petit-chat/petit-filou/commit/7b9d6fb077174246b678091215c883227b87da59))
-- *(cd)* Update build repo checkout ref ([#3](https://github.com/petit-chat/petit-filou/issues/3)) - ([af0b4fb](https://github.com/petit-chat/petit-filou/commit/af0b4fb7c076630d7be550e7e4e42005b7b4243d))
+### Added
 
-### 🚜 Refactor
+- Unit and integration tests.
 
-- *(lib)* Reduced nested iterator complexity - ([a4329a2](https://github.com/petit-chat/petit-filou/commit/a4329a244623dc2e79a6a51bb42a9298010e10f0))
+### Changed
 
-### 📚 Documentation
+- Split project in two different packages, pf_lib containing the business logic and pf_cli containing the user interface. This logic allows the publishing of pf_lib to crates.io.
 
-- *(contributing)* Fix broken urls - ([34c05f4](https://github.com/petit-chat/petit-filou/commit/34c05f483006c1993b0762955df3f1a8cf2fc467))
-- *(readme)* Add cd badge - ([66f87ad](https://github.com/petit-chat/petit-filou/commit/66f87adc2b4c7bf08c686fe24ba9315d441a25f3))
-- *(readme)* Fix options typo - ([08c819a](https://github.com/petit-chat/petit-filou/commit/08c819a4c396966e50715f71ae6a296773d17f74))
+### Removed
 
-### ⚙️ Miscellaneous Tasks
+- CD workflow.
+- Useless documentation.
+- Stop using [git-cliff](https://github.com/orhun/git-cliff).
+- CLI completions and man page.
 
-- *(cd)* Update release note - ([42332c8](https://github.com/petit-chat/petit-filou/commit/42332c868d0ed5beaf0b1f5c6baa488ab20c1050))
-- *(ci)* Split steps into jobs - ([ee9c624](https://github.com/petit-chat/petit-filou/commit/ee9c624c40160a41c2dddfa01d187e0951771479))
-- *(cliff)* Update body - ([18cc5c8](https://github.com/petit-chat/petit-filou/commit/18cc5c83f5c85cecf832abe938b1dc5ba01858d1))
-- *(github)* Update issue templates - ([e60e5ef](https://github.com/petit-chat/petit-filou/commit/e60e5efb6ce317ff3c6e4403e238aed3509845ce))
+## [0.3.1] - 2024-08-20
 
-## [0.3.0](https://github.com/petit-chat/petit-filou/compare/v0.2.1..v0.3.0) - 2024-08-19
+### Changed
 
-### 🚀 Features
+- Reduce nested iterator complexity in URL extractor functions.
+- Split CI workflow steps into separate jobs in order to improve failure predictability.
 
-- *(gen)* Add completion and man page generator - ([c1c7762](https://github.com/petit-chat/petit-filou/commit/c1c7762c907a80978111f11fc6a13554d8d75285))
+### Fixed
 
-### 🚜 Refactor
+- Typos and broken URLs in documentation.
+- CD now building with checkout to the right ref (#3).
 
-- *(args)* Moved cli args to a dedicated module - ([4a9b653](https://github.com/petit-chat/petit-filou/commit/4a9b653e710da68ab99ec4af26641a7c626e3a73))
+## [0.3.0] - 2024-08-19
 
-### ⚙️ Miscellaneous Tasks
+### Added
 
-- *(cd)* Add workflow - ([973677d](https://github.com/petit-chat/petit-filou/commit/973677d8507f3231baff565655afbfe9dba39e33))
-- *(ci)* Run for pull request towards main only - ([33e6d54](https://github.com/petit-chat/petit-filou/commit/33e6d5445442a84b8900f5ee0c40435f78fb4bc0))
+- Generation of man page and CLI completions.
+- Fully automated CD building and uploading assets to release.
+- Using [git-cliff](https://github.com/orhun/git-cliff).
 
-## [0.2.1](https://github.com/petit-chat/petit-filou/compare/v0.2.0..v0.2.1) - 2024-08-16
+### Changed
 
-### ⚙️ Miscellaneous Tasks
+- Move CLI args to a dedicated module.
+- CI now running for pull request towards main branch only.
 
-- *(deps)* Bump h2 from 0.3.24 to 0.3.26 - ([cdc284c](https://github.com/petit-chat/petit-filou/commit/cdc284cb913d4351d313f4514856af1333cbd065))
-- *(deps)* Bump openssl from 0.10.64 to 0.10.66 - ([789d1f6](https://github.com/petit-chat/petit-filou/commit/789d1f606be8ce5aeca1113409506a1ebd040f90))
+### Removed
 
-## [0.2.0](https://github.com/petit-chat/petit-filou/compare/v0.1.0..v0.2.0) - 2024-08-16
+- Release workflow.
 
-### 📚 Documentation
+## [0.2.1] - 2024-08-16
 
-- *(contributing)* Correct urls - ([6809df4](https://github.com/petit-chat/petit-filou/commit/6809df40ab178ba448802ce26f0293aee0897c2b))
+### Changed
 
-### ⚙️ Miscellaneous Tasks
+- Dependencies bump.
 
-- *(ci)* Add release binary upload workflow - ([59fb903](https://github.com/petit-chat/petit-filou/commit/59fb903bffd4217ec9d8d8b2cc4bce5aee5e8f1b))
-- *(github)* Issue templates - ([22fff8d](https://github.com/petit-chat/petit-filou/commit/22fff8d67183722807c9ecc068e0257cd2905ae8))
+## [0.2.0] - 2024-08-16
+
+### Added
+
+- Release workflow uploading binary files to releases.
+- Issue templates.
+
+### Fixed
+
+- Broken URLs in documentation.
 
 ## [0.1.0] - 2024-08-16
 
-### 📚 Documentation
+### Added
 
-- *(readme)* Correct and remove urls - ([c17487a](https://github.com/petit-chat/petit-filou/commit/c17487afc0fb823a272c18b183c0789e1c1f25d5))
+- This project to help people retrieve video URLs on WordPress websites.
 
-<!-- generated by git-cliff -->
+[unreleased]: https://github.com/petit-chat/petit-filou/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/petit-chat/petit-filou/compare/v0.3.0...v0.3.1
+[0.3.0]: https://github.com/petit-chat/petit-filou/compare/v0.2.1...v0.3.0
+[0.2.1]: https://github.com/petit-chat/petit-filou/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/petit-chat/petit-filou/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/petit-chat/petit-filou/releases/tag/v0.1.0
