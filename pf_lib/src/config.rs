@@ -28,16 +28,16 @@ pub struct FinderConfig {
     /// The target type for the `Finder`.
     pub target: FinderTarget,
 
-    /// Result set published before a given date (cf. https://core.trac.wordpress.org/ticket/41032).
+    /// Result set published before a given date (cf. <https://core.trac.wordpress.org/ticket/41032>).
     pub before: Option<String>,
 
-    /// Result set modified before a given date (cf. https://core.trac.wordpress.org/ticket/41032).
+    /// Result set modified before a given date (cf. <https://core.trac.wordpress.org/ticket/41032>).
     pub modified_before: Option<String>,
 
-    /// Result set published after a given date (cf. https://core.trac.wordpress.org/ticket/41032).
+    /// Result set published after a given date (cf. <https://core.trac.wordpress.org/ticket/41032>).
     pub after: Option<String>,
 
-    /// Result set modified after a given date (cf. https://core.trac.wordpress.org/ticket/41032).
+    /// Result set modified after a given date (cf. <https://core.trac.wordpress.org/ticket/41032>).
     pub modified_after: Option<String>,
 
     /// Ensures result set excludes specific IDs.
