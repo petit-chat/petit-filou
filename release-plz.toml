@@ -1,0 +1,13 @@
+[workspace]
+git_release_name = "v{{ version }}"
+git_tag_name = "v{{ version }}"
+
+[[package]]
+name = "pf_cli"
+publish = false
+version_group = "group1"
+
+[[package]]
+name = "pf_lib"
+publish = false
+version_group = "group1"
