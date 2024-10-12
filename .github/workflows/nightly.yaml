@@ -1,0 +1,26 @@
+name: Nightly
+
+on:
+  schedule:
+    - cron: '45 6 * * *'
+
+jobs:
+  release-nightly:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Release Nightly
+        run: |
+          if [[ -z $(git tag -l nightly) ]]; then
+            gh release create nightly --title nightly --generate-notes --prerelease
+          elif [[ $(git diff nightly --name-only -B -M -C) ]]; then
+            gh release delete nightly --yes --cleanup-tag || true
+            git tag -d nightly || true
+            gh release create nightly --title nightly --generate-notes --prerelease
+          fi
