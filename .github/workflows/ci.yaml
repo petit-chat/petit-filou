@@ -35,6 +35,7 @@ jobs:
       - name: Check the links
         uses: lycheeverse/lychee-action@v1
         with:
+          args: --exclude-path CHANGELOG.md
           fail: true
           token: ${{ secrets.GITHUB_TOKEN }}
 

@@ -9,5 +9,5 @@ version_group = "group1"
 
 [[package]]
 name = "pf_lib"
-publish = false
+changelog_path = "../CHANGELOG.md"
 version_group = "group1"
