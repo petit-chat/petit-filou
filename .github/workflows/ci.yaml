@@ -2,17 +2,18 @@ name: Continuous Integration
 
 on:
   pull_request:
+    paths-ignore:
+      - "**.md"
   push:
     branches:
       - main
-  schedule:
-    - cron: "0 0 * * *"
+    paths-ignore:
+      - "**.md"
 
 env:
   CARGO_TERM_COLOR: always
   CARGO_INCREMENTAL: 0
   RUSTFLAGS: "-D warnings"
-  RUSTDOCFLAGS: "-D warnings"
 
 jobs:
   audit:
@@ -25,20 +26,6 @@ jobs:
       - name: Audit Rust Dependencies
         uses: actions-rust-lang/audit@v1
 
-  broken-links:
-    name: Check for Broken Links
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Check the links
-        uses: lycheeverse/lychee-action@v1
-        with:
-          args: --exclude-path CHANGELOG.md
-          fail: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-
   doc:
     name: Documentation
     runs-on: ubuntu-latest
@@ -50,6 +37,8 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Doc
+        env:
+          RUSTDOCFLAGS: "-D warnings"
         run: cargo doc
 
   coverage:

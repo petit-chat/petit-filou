@@ -1,28 +1,10 @@
-name: Continuous Deployment
+name: Build Binaries
 
 on:
   release:
     types: [published]
 
 jobs:
-  build-and-push-docker-image:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Login to ghcr.io
-        uses: docker/login-action@v1
-        with:
-            registry: ghcr.io
-            username: ${{github.actor}}
-            password: ${{secrets.GITHUB_TOKEN}}
-
-      - name: Build and Push Docker Image
-        run: |
-          docker build . --tag ghcr.io/petit-chat/pf:${{ github.event.release.tag_name }}
-          docker push ghcr.io/petit-chat/pf:${{ github.event.release.tag_name }}
-
   build-and-release-binaries:
     name: Build for Multiple Targets
     runs-on: ${{ matrix.os }}
