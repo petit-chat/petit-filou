@@ -631,7 +631,7 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    petit-filou searches for mp4 videos for a given wordpress website.
+    petit-filou scans wordpress website to find videos.
     Copyright (C) 2024  petit-chat
 
     This program is free software: you can redistribute it and/or modify

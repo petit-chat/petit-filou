@@ -8,11 +8,11 @@ lazy_static! {
     static ref ALLOWED_MIME_TYPES: Vec<&'static str> = vec![
         "video/mp4",
         "video/mpeg",
-        "video/webm",
         "video/quicktime",
+        "video/webm",
         "video/x-flv",
-        "video/x-msvideo",
         "video/x-ms-wmv",
+        "video/x-msvideo",
     ];
 }
 
