@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1](https://github.com/petit-chat/petit-filou/compare/v1.1.0...v1.1.1) - 2024-10-18
+
+### Fixed
+
+- *(pf_lib)* verify that existing urls are mp4 videos
+
 ## [1.1.0](https://github.com/petit-chat/petit-filou/compare/v1.0.0...v1.1.0) - 2024-10-13
 
 ### Added
