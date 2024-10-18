@@ -1,6 +1,8 @@
 use clap::{Parser, ValueEnum};
 
-/// Searches for mp4 videos for a given WordPress website.
+/// Scans WordPress website to find videos.
+///
+/// Supported MIME types: video/mp4, video/mpeg, video/quicktime, video/webm, video/x-flv, video/x-ms-wmv, video/x-msvideo
 #[derive(Parser)]
 #[command(name = "pf", author, version, about)]
 pub struct Opt {

@@ -6,7 +6,17 @@ description = "petit-filou core library"
 documentation = "https://github.com/petit-chat/petit-filou"
 homepage = "https://github.com/petit-chat/petit-filou"
 repository = "https://github.com/petit-chat/petit-filou"
-keywords = ["wordpress", "mp4", "mp4-video-download", "scraper", "scraping"]
+keywords = [
+    "content-scraper",
+    "media-scraper",
+    "video-scraper",
+    "video",
+    "web-scraper",
+    "wordpress-video",
+    "wordpress",
+    "wp-scraper",
+    "wp-video",
+]
 categories = ["api-bindings"]
 license = "GPL-3.0-or-later"
 edition = "2021"
@@ -14,7 +24,11 @@ edition = "2021"
 [dependencies]
 lazy_static = "1.4.0"
 log.workspace = true
-reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls", "blocking"] }
+reqwest = { version = "0.11", default-features = false, features = [
+    "json",
+    "rustls-tls",
+    "blocking",
+] }
 regex = "1.10.4"
 serde_json = "1.0"
 

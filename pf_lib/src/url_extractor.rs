@@ -14,7 +14,7 @@ lazy_static! {
 
     /// Regular expression to match URLs of media files in the content body.
     static ref BODY_RE: Regex =
-        Regex::new(r"https?://[^/]+(?:/blog)?/wp-content/uploads/\d{4}/\d{2}/[^/]+\.mp4").unwrap();
+        Regex::new(r"https?:(?:\\)?/(?:\\)?/[^/]+(?:/blog)?(?:\\)?/wp-content(?:\\)?/uploads(?:\\)?/\d{4}(?:\\)?/\d{2}(?:\\)?/[^/]+\.(?:avi|flv|mp4|mpeg|mov|webm|wmv)").unwrap();
 
     /// Regular expression to match and capture base URL and slug of a complex URL.
     static ref LINK_RE: Regex = Regex::new(r"^(https?://[^/]+)(?:/[^/]+)*/([^/]+)/?$").unwrap();
@@ -86,7 +86,14 @@ pub fn p2(value: &[Value]) -> HashSet<String> {
             Some(
                 BODY_RE
                     .find_iter(item["content"]["rendered"].as_str()?)
-                    .chain(BODY_RE.find_iter(item["excerpt"]["rendered"].as_str()?))
+                    .chain(
+                        BODY_RE.find_iter(
+                            item["excerpt"]["rendered"]
+                                .as_str()?
+                                .to_lowercase()
+                                .as_str(),
+                        ),
+                    )
                     .map(|m| m.as_str().to_string())
                     .collect::<Vec<String>>(),
             )
@@ -182,14 +189,24 @@ mod tests {
     #[test]
     fn test_p2() {
         let values = vec![
-            json!({"content": {"rendered": "http://example.com/wp-content/uploads/2021/01/video.mp4"}, "excerpt": {"rendered": ""}}),
-            json!({"content": {"rendered": ""}, "excerpt": {"rendered": "http://example.com/wp-content/uploads/2021/01/video.mp4"}}),
-            json!({"content": {"rendered": "http://example.com/blog/wp-content/uploads/2021/01/video.mp4"}, "excerpt": {"rendered": ""}}),
+            json!({"content": {"rendered": "http://example.com/wp-content/uploads/2021/01/video-1.mp4"}, "excerpt": {"rendered": ""}}),
+            json!({"content": {"rendered": ""}, "excerpt": {"rendered": "http://example.com/wp-content/uploads/2021/01/video-2.mp4"}}),
+            json!({"content": {"rendered": "http://example.com/blog/wp-content/uploads/2021/01/video-3.mp4"}, "excerpt": {"rendered": ""}}),
+            json!({"content": {"rendered": ""}, "excerpt": {"rendered": "https:\\/\\/www.example.com\\/wp-content\\/uploads\\/2021\\/01\\/video-4.mov"}}),
+            json!({"content": {"rendered": ""}, "excerpt": {"rendered": "https:\\/\\/www.example.com\\/wp-content\\/uploads\\/2021\\/01\\/video-5.MOV"}}),
+            json!({"content": {"rendered": ""}, "excerpt": {"rendered": "https:\\/\\/www.example.com\\/wp-content\\/uploads\\/2021\\/01\\/video-6.MP4"}}),
         ];
         let result = p2(&values);
         let expected: HashSet<String> = vec![
-            "http://example.com/wp-content/uploads/2021/01/video.mp4".to_string(),
-            "http://example.com/blog/wp-content/uploads/2021/01/video.mp4".to_string(),
+            "http://example.com/wp-content/uploads/2021/01/video-1.mp4".to_string(),
+            "http://example.com/wp-content/uploads/2021/01/video-2.mp4".to_string(),
+            "http://example.com/blog/wp-content/uploads/2021/01/video-3.mp4".to_string(),
+            "https:\\/\\/www.example.com\\/wp-content\\/uploads\\/2021\\/01\\/video-4.mov"
+                .to_string(),
+            "https:\\/\\/www.example.com\\/wp-content\\/uploads\\/2021\\/01\\/video-5.mov"
+                .to_string(),
+            "https:\\/\\/www.example.com\\/wp-content\\/uploads\\/2021\\/01\\/video-6.mp4"
+                .to_string(),
         ]
         .into_iter()
         .collect();
