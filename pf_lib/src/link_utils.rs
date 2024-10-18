@@ -134,6 +134,10 @@ pub fn does_link_exist(client: &Client, url: &str) -> bool {
         Ok(response) => {
             log::debug!("Response status: {}", response.status());
             response.status().is_success()
+                && response
+                    .headers()
+                    .get("content-type")
+                    .map_or(false, |v| v == "video/mp4")
         }
         Err(error) => {
             log::error!("Error checking link: {}", error);
@@ -249,7 +253,10 @@ mod tests {
     fn test_does_link_exist() {
         let mut server = mockito::Server::new();
 
-        let mock = server.mock("HEAD", "/").with_status(200).create();
+        let mock = server
+            .mock("HEAD", "/")
+            .with_header("Content-Type", "video/mp4")
+            .create();
 
         let client = Client::new();
         let url = server.url();
@@ -261,10 +268,32 @@ mod tests {
     }
 
     #[test]
+    fn test_does_link_exist_when_incorrect_header() {
+        let mut server = mockito::Server::new();
+
+        let mock = server
+            .mock("HEAD", "/")
+            .with_header("Content-Type", "text/html; charset=UTF-8")
+            .create();
+
+        let client = Client::new();
+        let url = server.url();
+
+        let exists = does_link_exist(&client, &url);
+
+        mock.assert();
+        assert!(!exists);
+    }
+
+    #[test]
     fn test_does_link_exist_when_url_does_not_exist() {
         let mut server = mockito::Server::new();
 
-        let mock = server.mock("HEAD", "/").with_status(503).create();
+        let mock = server
+            .mock("HEAD", "/")
+            .with_header("Content-Type", "video/mp4")
+            .with_status(503)
+            .create();
 
         let client = Client::new();
         let url = server.url();

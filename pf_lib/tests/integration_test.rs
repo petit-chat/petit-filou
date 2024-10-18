@@ -18,10 +18,12 @@ mod tests {
 
         let image_mock = server
             .mock("HEAD", "/wp-content/uploads/2021/01/image.mp4")
+            .with_header("Content-Type", "video/mp4")
             .create();
 
         let video_mock = server
             .mock("HEAD", "/wp-content/uploads/2021/01/video.mp4")
+            .with_header("Content-Type", "video/mp4")
             .create();
 
         let config = FinderConfig {
@@ -63,16 +65,22 @@ mod tests {
 
         let url = server.url();
 
-        let body = json!([{"_embedded": {"wp:featuredmedia": [{"source_url": format!("{}/wp-content/uploads/2021/01/video.mp4", url)}]}}]);
+        let body = json!([{"source_url": format!("{}/wp-content/uploads/2021/01/image.jpg", url)}, {"_embedded": {"wp:featuredmedia": [{"source_url": format!("{}/wp-content/uploads/2021/01/video.mp4", url)}]}}]);
 
         let api_mock = server
             .mock("GET", "/wp-json/wp/v2/media?per_page=100")
             .with_body(body.to_string())
             .create();
 
-        let video_mock = server
-            .mock("HEAD", "/wp-content/uploads/2021/01/video.mp4")
+        let not_found_mock = server
+            .mock("HEAD", "/wp-content/uploads/2021/01/image.mp4")
+            .with_header("Content-Type", "video/mp4")
             .with_status(404)
+            .create();
+
+        let invalid_header_mock = server
+            .mock("HEAD", "/wp-content/uploads/2021/01/video.mp4")
+            .with_header("Content-Type", "application/json")
             .create();
 
         let config = FinderConfig {
@@ -83,7 +91,8 @@ mod tests {
         assert!(find(&config).next().is_none());
 
         api_mock.assert();
-        video_mock.assert();
+        not_found_mock.assert();
+        invalid_header_mock.assert();
     }
 
     #[test]

@@ -5,9 +5,7 @@ git_tag_name = "v{{ version }}"
 [[package]]
 name = "pf_cli"
 release = false
-version_group = "group1"
 
 [[package]]
 name = "pf_lib"
 changelog_path = "../CHANGELOG.md"
-version_group = "group1"
