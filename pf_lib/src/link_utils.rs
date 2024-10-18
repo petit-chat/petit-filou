@@ -1,7 +1,20 @@
 use crate::{FinderConfig, FinderTarget};
 
+use lazy_static::lazy_static;
 use reqwest::blocking::Client;
 use std::error::Error;
+
+lazy_static! {
+    static ref ALLOWED_MIME_TYPES: Vec<&'static str> = vec![
+        "video/mp4",
+        "video/mpeg",
+        "video/webm",
+        "video/quicktime",
+        "video/x-flv",
+        "video/x-msvideo",
+        "video/x-ms-wmv",
+    ];
+}
 
 /// Builds a paginated WordPress API URL from the given `FinderConfig`.
 ///
@@ -134,10 +147,9 @@ pub fn does_link_exist(client: &Client, url: &str) -> bool {
         Ok(response) => {
             log::debug!("Response status: {}", response.status());
             response.status().is_success()
-                && response
-                    .headers()
-                    .get("content-type")
-                    .map_or(false, |v| v == "video/mp4")
+                && response.headers().get("content-type").map_or(false, |v| {
+                    ALLOWED_MIME_TYPES.contains(&v.to_str().unwrap_or_default())
+                })
         }
         Err(error) => {
             log::error!("Error checking link: {}", error);
