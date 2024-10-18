@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0](https://github.com/petit-chat/petit-filou/compare/v1.1.1...v2.0.0) - 2024-10-18
+
+### Added
+
+- [**breaking**] support multiple mime types other than mp4 ([#12](https://github.com/petit-chat/petit-filou/pull/12))
+
 ## [1.1.1](https://github.com/petit-chat/petit-filou/compare/v1.1.0...v1.1.1) - 2024-10-18
 
 ### Fixed
