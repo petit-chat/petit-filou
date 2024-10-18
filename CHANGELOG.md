@@ -7,13 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.1.0] - 2024-10-13
+## [1.1.0](https://github.com/petit-chat/petit-filou/compare/v1.0.0...v1.1.0) - 2024-10-13
 
 ### Added
 
 - Automated release management with release-plz and ci/cd workflow (#5)
 
-## [1.0.0] - 2024-10-10
+## [1.0.0](https://github.com/petit-chat/petit-filou/compare/v0.3.1...v1.0.0) - 2024-10-10
 
 ### Added
 
@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Stop using [git-cliff](https://github.com/orhun/git-cliff).
 - CLI completions and man page.
 
-## [0.3.1] - 2024-08-20
+## [0.3.1](https://github.com/petit-chat/petit-filou/compare/v0.3.0...v0.3.1) - 2024-08-20
 
 ### Changed
 
@@ -42,7 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Typos and broken URLs in documentation.
 - CD now building with checkout to the right ref (#3).
 
-## [0.3.0] - 2024-08-19
+## [0.3.0](https://github.com/petit-chat/petit-filou/compare/v0.2.1...v0.3.0) - 2024-08-19
 
 ### Added
 
@@ -59,13 +59,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Release workflow.
 
-## [0.2.1] - 2024-08-16
+## [0.2.1](https://github.com/petit-chat/petit-filou/compare/v0.2.0...v0.2.1) - 2024-08-16
 
 ### Changed
 
 - Dependencies bump.
 
-## [0.2.0] - 2024-08-16
+## [0.2.0](https://github.com/petit-chat/petit-filou/compare/v0.1.0...v0.2.0) - 2024-08-16
 
 ### Added
 
@@ -76,16 +76,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Broken URLs in documentation.
 
-## [0.1.0] - 2024-08-16
+## [0.1.0](https://github.com/petit-chat/petit-filou/releases/tag/v0.1.0) - 2024-08-16
 
 ### Added
 
 - This project to help people retrieve video URLs on WordPress websites.
-
-[unreleased]: https://github.com/petit-chat/petit-filou/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/petit-chat/petit-filou/compare/v0.3.1...v1.0.0
-[0.3.1]: https://github.com/petit-chat/petit-filou/compare/v0.3.0...v0.3.1
-[0.3.0]: https://github.com/petit-chat/petit-filou/compare/v0.2.1...v0.3.0
-[0.2.1]: https://github.com/petit-chat/petit-filou/compare/v0.2.0...v0.2.1
-[0.2.0]: https://github.com/petit-chat/petit-filou/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/petit-chat/petit-filou/releases/tag/v0.1.0
