@@ -8,4 +8,4 @@ release = false
 
 [[package]]
 name = "pf_lib"
-changelog_path = "../CHANGELOG.md"
+changelog_path = "CHANGELOG.md"
