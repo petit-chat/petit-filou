@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0](https://github.com/petit-chat/petit-filou/compare/v2.0.0...v3.0.0) - 2024-10-25
+
+### Other
+
+- *(pf_lib)* [**breaking**] use rust features for mime types
+
 ## [2.0.0](https://github.com/petit-chat/petit-filou/compare/v1.1.1...v2.0.0) - 2024-10-18
 
 ### Added
