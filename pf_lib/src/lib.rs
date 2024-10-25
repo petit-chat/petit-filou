@@ -5,12 +5,14 @@
 //! - `config`: Defines configuration options for the `Finder`.
 //! - `finder`: Implements the logic to find and fetch existing video URLs.
 //! - `link_utils`: Utility functions for handling links.
+//! - `mime_types`: Defines supported MIME types for scraping.
 //! - `url_extractor`: Functions to extract URLs from WordPress API responses.
 
 mod api;
 mod config;
 mod finder;
 mod link_utils;
+mod mime_types;
 mod url_extractor;
 
 pub use config::{FinderConfig, FinderTarget};

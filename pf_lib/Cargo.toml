@@ -24,3 +24,13 @@ serde_json = "1.0"
 
 [dev-dependencies]
 mockito = "1.4.0"
+
+[features]
+default = ["mp4", "mov"]
+avi = []
+flv = []
+mov = []
+mp4 = []
+mpeg = []
+webm = []
+wmv = []
