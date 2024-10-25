@@ -3,6 +3,8 @@ use regex::Regex;
 use serde_json::Value;
 use std::collections::HashSet;
 
+use crate::mime_types::SUPPORTED_MIME_TYPES;
+
 lazy_static! {
     /// Regular expression to match source URLs of media files.
     static ref SRC_RE: Regex =
@@ -13,8 +15,21 @@ lazy_static! {
     static ref EXT_RE: Regex = Regex::new(r"\.\w+$").unwrap();
 
     /// Regular expression to match URLs of media files in the content body.
-    static ref BODY_RE: Regex =
-        Regex::new(r"https?:(?:\\)?/(?:\\)?/[^/]+(?:/blog)?(?:\\)?/wp-content(?:\\)?/uploads(?:\\)?/\d{4}(?:\\)?/\d{2}(?:\\)?/[^/]+\.(?:avi|flv|mp4|mpeg|mov|webm|wmv)").unwrap();
+    static ref BODY_RE: Regex = {
+        let mut pattern = r"https?:(?:\\)?/(?:\\)?/[^/]+(?:/blog)?(?:\\)?/wp-content(?:\\)?/uploads(?:\\)?/\d{4}(?:\\)?/\d{2}(?:\\)?/[^/]+\.(?:".to_string();
+
+        pattern.push_str(
+            &SUPPORTED_MIME_TYPES
+                .iter()
+                .map(|(ext, _)| *ext)
+                .collect::<Vec<_>>()
+                .join("|"),
+        );
+
+        pattern.push(')');
+
+        Regex::new(&pattern).unwrap()
+    };
 
     /// Regular expression to match and capture base URL and slug of a complex URL.
     static ref LINK_RE: Regex = Regex::new(r"^(https?://[^/]+)(?:/[^/]+)*/([^/]+)/?$").unwrap();

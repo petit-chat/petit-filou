@@ -2,7 +2,7 @@
 name = "pf_cli"
 version = "1.0.0"
 authors = ["petit-chat"]
-description = "petit-filou scans wordpress website to find videos"
+description = "petit-filou scans wordpress websites to find videos"
 documentation = "https://github.com/petit-chat/petit-filou"
 homepage = "https://github.com/petit-chat/petit-filou"
 repository = "https://github.com/petit-chat/petit-filou"
