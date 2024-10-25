@@ -13,5 +13,5 @@ COPY --from=builder /src/target/x86_64-unknown-linux-musl/release/pf /
 CMD ["/pf"]
 
 LABEL org.opencontainers.image.source=https://github.com/petit-chat/petit-filou
-LABEL org.opencontainers.image.description="petit-filou scans wordpress website to find videos"
+LABEL org.opencontainers.image.description="petit-filou scans wordpress websites to find videos"
 LABEL org.opencontainers.image.licenses=GPL-3.0-or-later

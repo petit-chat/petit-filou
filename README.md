@@ -13,9 +13,9 @@ You can download the [latest release](https://github.com/petit-chat/petit-filou/
 
 ```console
 $ pf --help
-Scans WordPress website to find videos.
+Scans WordPress websites to find videos.
 
-Supported MIME types: video/mp4, video/mpeg, video/quicktime, video/webm, video/x-flv, video/x-ms-wmv, video/x-msvideo
+Supported MIME types: video/mp4 and video/quicktime (.mov).
 
 Usage: pf [OPTIONS] <URL> <MODE>
 
