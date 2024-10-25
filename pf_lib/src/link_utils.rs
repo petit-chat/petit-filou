@@ -1,20 +1,7 @@
-use crate::{FinderConfig, FinderTarget};
+use crate::{mime_types::SUPPORTED_MIME_TYPES, FinderConfig, FinderTarget};
 
-use lazy_static::lazy_static;
 use reqwest::blocking::Client;
 use std::error::Error;
-
-lazy_static! {
-    static ref ALLOWED_MIME_TYPES: Vec<&'static str> = vec![
-        "video/mp4",
-        "video/mpeg",
-        "video/quicktime",
-        "video/webm",
-        "video/x-flv",
-        "video/x-ms-wmv",
-        "video/x-msvideo",
-    ];
-}
 
 /// Builds a paginated WordPress API URL from the given `FinderConfig`.
 ///
@@ -148,7 +135,11 @@ pub fn does_link_exist(client: &Client, url: &str) -> bool {
             log::debug!("Response status: {}", response.status());
             response.status().is_success()
                 && response.headers().get("content-type").map_or(false, |v| {
-                    ALLOWED_MIME_TYPES.contains(&v.to_str().unwrap_or_default())
+                    SUPPORTED_MIME_TYPES
+                        .iter()
+                        .map(|(_, mime)| *mime)
+                        .collect::<Vec<_>>()
+                        .contains(&v.to_str().unwrap_or_default())
                 })
         }
         Err(error) => {
