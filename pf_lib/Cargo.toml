@@ -10,6 +10,7 @@ keywords = ["video-scraper", "video", "wordpress", "wp-scraper", "wp-video"]
 categories = ["api-bindings"]
 license = "GPL-3.0-or-later"
 edition = "2021"
+build = "build.rs"
 
 [dependencies]
 lazy_static = "1.4.0"
