@@ -18,7 +18,7 @@ path = "src/main.rs"
 [dependencies]
 log.workspace = true
 pf_lib = { version = "3.0.1", path = "../pf_lib" }
-clap = { version = "4.5.2", features = ["derive"] }
+clap = { version = "4.5.23", features = ["derive"] }
 env_logger = "0.11.5"
 
 [lints.rust]
