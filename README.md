@@ -7,7 +7,21 @@ petit-filou or pf is a command-line tool designed for retrieving videos from wor
 
 ## Installation
 
-You can download the [latest release](https://github.com/petit-chat/petit-filou/releases/latest) or run the [latest docker image](https://github.com/petit-chat/petit-filou/pkgs/container/pf).
+### Binary
+
+Download [latest release](https://github.com/petit-chat/petit-filou/releases/latest).
+
+### Docker
+
+```console
+$ docker pull ghcr.io/petit-chat/pf:latest
+```
+
+### Build Locally
+
+```console
+$ make build
+```
 
 ## Usage
 
