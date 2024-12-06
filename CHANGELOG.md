@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.1](https://github.com/petit-chat/petit-filou/compare/v3.0.0...v3.0.1) - 2024-12-06
+
+### Fixed
+
+- add feature check to ensure at least one target is defined ([#21](https://github.com/petit-chat/petit-filou/pull/21))
+
+### Other
+
+- *(deps)* update reqwest crate to version 0.12.9 ([#24](https://github.com/petit-chat/petit-filou/pull/24))
+- *(readme)* improve lib and how to ([#23](https://github.com/petit-chat/petit-filou/pull/23))
+
 ## [3.0.0](https://github.com/petit-chat/petit-filou/compare/v2.0.0...v3.0.0) - 2024-10-25
 
 ### Other
