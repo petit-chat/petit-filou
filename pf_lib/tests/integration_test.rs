@@ -107,11 +107,9 @@ mod tests {
     }
 
     #[test]
-    fn test_compile_fail_no_features() {
+    fn test_compile_fail_with_no_features() {
         let output = Command::new("cargo")
             .arg("build")
-            .arg("--manifest-path")
-            .arg("pf_lib/Cargo.toml")
             .arg("--no-default-features")
             .output()
             .expect("Failed to execute cargo build");
@@ -125,8 +123,6 @@ mod tests {
     fn test_compile_success_with_features() {
         let output = Command::new("cargo")
             .arg("build")
-            .arg("--manifest-path")
-            .arg("pf_lib/Cargo.toml")
             .arg("--features")
             .arg("mp4")
             .output()
