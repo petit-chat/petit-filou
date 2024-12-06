@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.2](https://github.com/petit-chat/petit-filou/compare/v3.0.1...v3.0.2) - 2024-12-06
+
+### Other
+
+- *(deps)* bump mockito from 1.5.0 to 1.6.1 ([#27](https://github.com/petit-chat/petit-filou/pull/27))
+- *(deps)* bump regex from 1.10.6 to 1.11.1 ([#26](https://github.com/petit-chat/petit-filou/pull/26))
+
 ## [3.0.1](https://github.com/petit-chat/petit-filou/compare/v3.0.0...v3.0.1) - 2024-12-06
 
 ### Fixed
