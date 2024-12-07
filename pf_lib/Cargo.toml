@@ -1,6 +1,6 @@
 [package]
 name = "pf_lib"
-version = "3.0.1"
+version = "3.0.2"
 authors = ["petit-chat"]
 description = "petit-filou core library"
 documentation = "https://github.com/petit-chat/petit-filou"
