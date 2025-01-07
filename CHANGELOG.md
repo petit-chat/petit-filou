@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.3](https://github.com/petit-chat/petit-filou/compare/v3.0.2...v3.0.3) - 2025-01-07
+
+### Other
+
+- *(deps)* bump reqwest from 0.12.9 to 0.12.12 (#34)
+
 ## [3.0.2](https://github.com/petit-chat/petit-filou/compare/v3.0.1...v3.0.2) - 2024-12-06
 
 ### Other
