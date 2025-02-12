@@ -1,0 +1,9 @@
+/.git/
+/.github/
+target/
+*.md
+.gitignore
+.lycheeignore
+Dockerfile
+LICENSE
+release-plz.toml
