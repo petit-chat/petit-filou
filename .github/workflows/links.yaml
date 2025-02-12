@@ -1,0 +1,21 @@
+name: Check for broken links
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  broken-links:
+    name: Check for broken links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check the links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --exclude '^https://github\.com/petit-chat/petit-filou/compare/' --no-progress --verbose './**/*.md'
+          fail: true
