@@ -44,6 +44,7 @@ jobs:
       - name: Build and upload assets
         uses: taiki-e/upload-rust-binary-action@main
         with:
+          archive: $bin-${{ github.event.release.name }}-$target
           bin: pf
           checksum: sha256
           include: README.md,CHANGELOG.md,LICENSE
