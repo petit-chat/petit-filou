@@ -4,6 +4,7 @@ petit-filou or pf is a command-line tool designed for retrieving videos from wor
 
 [![ci](https://github.com/petit-chat/petit-filou/actions/workflows/ci.yaml/badge.svg)](https://github.com/petit-chat/petit-filou/actions)
 [![codecov](https://codecov.io/gh/petit-chat/petit-filou/graph/badge.svg?token=DXSZBI5DAE)](https://codecov.io/gh/petit-chat/petit-filou)
+[![crates.io version](https://img.shields.io/crates/v/pf_lib?label=pf_cmd)](https://crates.io/crates/pf_cmd)
 [![crates.io version](https://img.shields.io/crates/v/pf_lib?label=pf_lib)](https://crates.io/crates/pf_lib)
 
 ## Installation
