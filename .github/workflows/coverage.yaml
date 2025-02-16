@@ -33,7 +33,7 @@ jobs:
 
       - name: Run llvm-cov
         run: |
-          cargo llm-cov --all-features --codecov --verbose --workspace
+          cargo llvm-cov --all-features --codecov --verbose --workspace
       
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
