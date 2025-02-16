@@ -2,7 +2,7 @@
 ///
 /// This enum is used to specify whether the `Finder` should target media or posts.
 /// The `Posts` variant includes fields to exclude specific categories and tags.
-#[derive(Default)]
+#[derive(Default, PartialEq, Debug)]
 pub enum FinderTarget {
     /// Target media items.
     #[default]
