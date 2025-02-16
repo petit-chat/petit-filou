@@ -1,7 +1,10 @@
+.PHONY: coverage
+coverage:
+	cargo llvm-cov --open
+
 .PHONY: test
 test:
-	cargo test --no-run --locked
-	cargo test -- --nocapture --quiet
+	cargo test --all-features
 
 .PHONY: lint
 lint:
