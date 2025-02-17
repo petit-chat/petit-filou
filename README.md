@@ -33,7 +33,7 @@ Scans WordPress websites to find videos.
 
 Supported MIME types: video/mp4 and video/quicktime (.mov).
 
-Usage: pf [OPTIONS] <URL> <MODE>
+Usage: pf [OPTIONS] <URL>
 
 Arguments:
   <URL>
