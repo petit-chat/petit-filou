@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## `pf_lib` - [0.1.2](https://github.com/petit-chat/petit-filou/compare/pf_lib-v0.1.1...pf_lib-v0.1.2) - 2025-02-17
+
+### Added
+- *(pf_cmd)* add date validation for command line arguments
+
+## `pf_cmd` - [0.1.3](https://github.com/petit-chat/petit-filou/compare/pf_cmd-v0.1.2...pf_cmd-v0.1.3) - 2025-02-17
+
+### Added
+- *(pf_cmd)* add date validation for command line arguments
+
 ## `pf_cmd` - [0.1.2](https://github.com/petit-chat/petit-filou/compare/pf_cmd-v0.1.1...pf_cmd-v0.1.2) - 2025-02-16
 
 ### Other
