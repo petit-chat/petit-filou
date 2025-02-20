@@ -2,7 +2,6 @@
 changelog_path = "CHANGELOG.md"
 git_release_enable = false
 pr_labels = ["release"]
-release_always = false
 
 [[package]]
 name = "pf_cmd"
