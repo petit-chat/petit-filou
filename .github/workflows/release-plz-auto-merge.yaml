@@ -9,11 +9,11 @@ permissions:
   pull-requests: write
 
 jobs:
-  dependabot:
+  release-plz:
     runs-on: ubuntu-latest
     if: github.event.pull_request.user.login == 'petit-chat' && startsWith(github.event.pull_request.head.ref, 'release-plz-')
     steps:
       - name: Auto-merge release-plz PRs
-        run: gh pr merge ${{ github.event.pull_request.html_url }}
+        run: gh pr merge -s ${{ github.event.pull_request.html_url }}
         env:
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}

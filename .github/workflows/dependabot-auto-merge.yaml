@@ -14,6 +14,6 @@ jobs:
     if: github.event.pull_request.user.login == 'dependabot[bot]'
     steps:
       - name: Auto-merge Dependabot PRs
-        run: gh pr merge ${{ github.event.pull_request.html_url }}
+        run: gh pr merge -s ${{ github.event.pull_request.html_url }}
         env:
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
