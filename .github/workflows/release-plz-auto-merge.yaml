@@ -4,16 +4,14 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   release-plz:
     runs-on: ubuntu-latest
     if: github.event.pull_request.user.login == 'petit-chat' && startsWith(github.event.pull_request.head.ref, 'release-plz-')
     steps:
       - name: Auto-merge release-plz PRs
-        run: gh pr merge -s ${{ github.event.pull_request.html_url }}
+        run: gh pr merge --auto -s ${{ github.event.pull_request.html_url }}
         env:
-          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          # Use custom token here to allow triggering other
+          # pipelines (e.g. binary builds) after release.
+          GH_TOKEN: ${{ secrets.RELEASE_PLZ_TOKEN }}

@@ -4,16 +4,14 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   dependabot:
     runs-on: ubuntu-latest
     if: github.event.pull_request.user.login == 'dependabot[bot]'
     steps:
       - name: Auto-merge Dependabot PRs
-        run: gh pr merge -s ${{ github.event.pull_request.html_url }}
+        run: gh pr merge --auto -s ${{ github.event.pull_request.html_url }}
         env:
-          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          # Use custom token here to allow triggering other
+          # pipelines (e.g. binary builds) after release.
+          GH_TOKEN: ${{ secrets.RELEASE_PLZ_TOKEN }}
