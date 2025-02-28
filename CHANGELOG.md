@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## `pf_cmd` - [0.1.6](https://github.com/petit-chat/petit-filou/compare/pf_cmd-v0.1.5...pf_cmd-v0.1.6) - 2025-02-28
+
+### Other
+- *(deps)* bump clap from 4.5.30 to 4.5.31 (#13)
+
 ## `pf_cmd` - [0.1.5](https://github.com/petit-chat/petit-filou/compare/pf_cmd-v0.1.4...pf_cmd-v0.1.5) - 2025-02-20
 
 ### Other
