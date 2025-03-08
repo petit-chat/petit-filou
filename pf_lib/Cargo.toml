@@ -24,7 +24,7 @@ serde_json = "1.0"
 tokio.workspace = true
 
 [dev-dependencies]
-mockito = "1.6.1"
+mockito = "1.7.0"
 
 [features]
 default = ["mp4", "mov"]
