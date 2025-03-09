@@ -7,22 +7,11 @@ on:
       - opened
 
 jobs:
-  dependabot:
+  auto-merge:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    if: github.event.pull_request.user.login == 'dependabot[bot]' || (github.event.pull_request.user.login == 'petit-chat' && startsWith(github.event.pull_request.head.ref, 'release-plz-'))
     steps:
-      - name: Auto-merge Dependabot PRs
-        run: gh pr merge --auto -s ${{ github.event.pull_request.html_url }}
-        env:
-          # Use custom token here to allow triggering other
-          # pipelines (e.g. binary builds) after merge.
-          GH_TOKEN: ${{ secrets.AUTO_MERGE_TOKEN }}
-
-  release-plz:
-    runs-on: ubuntu-latest
-    if: github.event.pull_request.user.login == 'petit-chat' && startsWith(github.event.pull_request.head.ref, 'release-plz-')
-    steps:
-      - name: Auto-merge release-plz PRs
+      - name: Auto-merge Dependabot and release-plz PRs
         run: gh pr merge --auto -s ${{ github.event.pull_request.html_url }}
         env:
           # Use custom token here to allow triggering other

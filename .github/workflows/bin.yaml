@@ -10,7 +10,6 @@ on:
 
 jobs:
   build-and-release-binaries:
-    name: Build for multiple targets
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -39,9 +38,7 @@ jobs:
             target: x86_64-pc-windows-msvc
       fail-fast: false
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-            
+      - uses: actions/checkout@v4    
       - name: Build and upload assets
         uses: taiki-e/upload-rust-binary-action@main
         with:

@@ -11,9 +11,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Release nightly
         env:
           GH_TOKEN: ${{ secrets.NIGHTLY_BUILD_TOKEN }}
