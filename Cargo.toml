@@ -7,6 +7,12 @@ futures-util = "0.3.31"
 regex = "1.11.1"
 tokio = { version = "1.44.0", features = ["full"] }
 
+[profile.dev]
+debug = 0
+opt-level = 3
+split-debuginfo = "unpacked"
+strip = "debuginfo"
+
 [profile.release]
 opt-level = 3
 debug = "none"

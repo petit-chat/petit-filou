@@ -1,16 +1,19 @@
-FROM rust:latest AS builder
+FROM lukemathwalker/cargo-chef:latest-rust-alpine AS chef
+WORKDIR /app
 
-RUN rustup target add x86_64-unknown-linux-musl
-RUN apt update && apt install -y musl-tools musl-dev
-RUN update-ca-certificates
-WORKDIR /src
+FROM chef AS planner
 COPY . .
-RUN cargo build --target x86_64-unknown-linux-musl --release
-RUN strip -s /src/target/x86_64-unknown-linux-musl/release/pf
+RUN cargo chef prepare
+
+FROM chef AS builder
+COPY --from=planner /app/recipe.json .
+RUN cargo chef cook --locked -r
+COPY . .
+RUN cargo build --locked -r
 
 FROM scratch
-COPY --from=builder /src/target/x86_64-unknown-linux-musl/release/pf /
-CMD ["/pf"]
+COPY --from=builder /app/target/release/pf /usr/local/bin/
+ENTRYPOINT ["/usr/local/bin/pf"]
 
 LABEL org.opencontainers.image.source=https://github.com/petit-chat/petit-filou
 LABEL org.opencontainers.image.description="petit-filou scans wordpress websites to find videos"

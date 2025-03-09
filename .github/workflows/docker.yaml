@@ -12,16 +12,12 @@ jobs:
   build-and-push-docker-image:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Login to ghcr.io
-        uses: docker/login-action@v3
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
         with:
             registry: ghcr.io
             username: ${{github.actor}}
             password: ${{secrets.GITHUB_TOKEN}}
-
       - name: Build and push Docker image
         run: |
           docker build . --tag ghcr.io/petit-chat/pf:${{ github.event.release.name }}
