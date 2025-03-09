@@ -7,7 +7,7 @@ RUN cargo chef prepare
 
 FROM chef AS builder
 COPY --from=planner /app/recipe.json .
-RUN cargo chef cook --locked -r
+RUN cargo chef cook --locked --release
 COPY . .
 RUN cargo build --locked -r
 
