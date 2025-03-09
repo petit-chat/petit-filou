@@ -1,18 +1,15 @@
-FROM lukemathwalker/cargo-chef:latest-rust-alpine AS chef
-WORKDIR /app
+FROM rust:latest AS builder
 
-FROM chef AS planner
+RUN rustup target add aarch64-unknown-linux-musl
+RUN apt update && apt install -y musl-tools musl-dev
+RUN update-ca-certificates
+WORKDIR /src
 COPY . .
-RUN cargo chef prepare
-
-FROM chef AS builder
-COPY --from=planner /app/recipe.json .
-RUN cargo chef cook --locked --release
-COPY . .
-RUN cargo build --locked -r
+RUN cargo build --target aarch64-unknown-linux-musl --release
+RUN strip -s /src/target/aarch64-unknown-linux-musl/release/pf
 
 FROM scratch
-COPY --from=builder /app/target/release/pf /usr/local/bin/
+COPY --from=builder /src/target/aarch64-unknown-linux-musl/release/pf /usr/local/bin/
 ENTRYPOINT ["/usr/local/bin/pf"]
 
 LABEL org.opencontainers.image.source=https://github.com/petit-chat/petit-filou
