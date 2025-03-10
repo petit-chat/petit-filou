@@ -88,7 +88,7 @@ async fn print_stream(config: &pf_lib::FinderConfig) -> Result<(), Box<dyn std::
     while let Some(res) = stream.next().await {
         match res {
             Ok(url) => println!("{}", url),
-            Err(e) => eprintln!("{}", e),
+            Err(e) => return Err(e),
         }
     }
     Ok(())
