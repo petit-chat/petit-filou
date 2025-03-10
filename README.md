@@ -74,17 +74,17 @@ Options:
 ### Retrieve a Maximum of Video URLs
 
 ```console
-$ pf http://www.example.com slow
+$ pf http://www.example.com
 ```
 
 ### Retrieve Video URLs After a Specified Date
 
 ```console
-$ pf http://www.example.com fast --after 2024-04-06T18:44:41
+$ pf http://www.example.com --after 2024-04-06T18:44:41
 ```
 
 ### Retrieve Video URLs Excluding Specific Tags
 
 ```console
-$ pf http://www.example.com fast --tags-exclude 1 --tags-exclude 2 --tags-exclude 3
+$ pf http://www.example.com --tags-exclude 1 --tags-exclude 2 --tags-exclude 3
 ```
