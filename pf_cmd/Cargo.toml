@@ -1,6 +1,6 @@
 [package]
 name = "pf_cmd"
-version = "0.1.10"
+version = "0.1.11"
 authors = ["petit-chat"]
 description = "petit-filou scans wordpress websites to find videos"
 repository = "https://github.com/petit-chat/petit-filou"
@@ -17,7 +17,7 @@ path = "src/main.rs"
 [dependencies]
 clap = { version = "4.5.34", features = ["derive"] }
 futures-util.workspace = true
-pf_lib = { path = "../pf_lib", version = "0.1.4" }
+pf_lib = { path = "../pf_lib", version = "0.1.5" }
 regex.workspace = true
 tokio.workspace = true
 
