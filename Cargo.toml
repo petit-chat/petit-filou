@@ -5,7 +5,7 @@ members = ["pf_cmd", "pf_lib"]
 [workspace.dependencies]
 futures-util = "0.3.31"
 regex = "1.11.1"
-tokio = { version = "1.44.1", features = ["full"] }
+tokio = { version = "1.44.2", features = ["full"] }
 
 [profile.dev]
 codegen-units = 256
