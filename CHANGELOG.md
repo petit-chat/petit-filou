@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## `pf_cmd` - [0.1.12](https://github.com/petit-chat/petit-filou/compare/pf_cmd-v0.1.11...pf_cmd-v0.1.12) - 2025-04-08
+
+### Other
+- update Cargo.toml dependencies
+
+## `pf_lib` - [0.1.6](https://github.com/petit-chat/petit-filou/compare/pf_lib-v0.1.5...pf_lib-v0.1.6) - 2025-04-08
+
+### Other
+- update Cargo.toml dependencies
+
 ## `pf_cmd` - [0.1.11](https://github.com/petit-chat/petit-filou/compare/pf_cmd-v0.1.10...pf_cmd-v0.1.11) - 2025-04-01
 
 ### Other
