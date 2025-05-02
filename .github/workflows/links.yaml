@@ -1,5 +1,8 @@
 name: Check for broken links
 
+permissions:
+  contents: read
+
 on:
   push:
     branches:
