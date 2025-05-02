@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## `pf_cmd` - [0.1.14](https://github.com/petit-chat/petit-filou/compare/pf_cmd-v0.1.13...pf_cmd-v0.1.14) - 2025-05-02
+
+### Fixed
+- *(pf_cmd)* exit on error
+
+### Other
+- *(readme)* update examples
+
 ## `pf_cmd` - [0.1.13](https://github.com/petit-chat/petit-filou/compare/pf_cmd-v0.1.12...pf_cmd-v0.1.13) - 2025-05-01
 
 ### Other
