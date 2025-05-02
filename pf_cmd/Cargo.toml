@@ -1,6 +1,6 @@
 [package]
 name = "pf_cmd"
-version = "0.1.13"
+version = "0.1.14"
 authors = ["petit-chat"]
 description = "petit-filou scans wordpress websites to find videos"
 repository = "https://github.com/petit-chat/petit-filou"
