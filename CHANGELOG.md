@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## `pf_lib` - [0.1.7](https://github.com/petit-chat/petit-filou/compare/pf_lib-v0.1.6...pf_lib-v0.1.7) - 2025-06-02
+
+### Other
+- *(pf_lib)* fix api::tests::test_get_stream_with_invalid_url
+- *(deps)* bump reqwest from 0.12.15 to 0.12.18 ([#42](https://github.com/petit-chat/petit-filou/pull/42))
+
 ## `pf_cmd` - [0.1.14](https://github.com/petit-chat/petit-filou/compare/pf_cmd-v0.1.13...pf_cmd-v0.1.14) - 2025-05-02
 
 ### Other
