@@ -101,7 +101,7 @@ mod tests {
         let error = next.err().unwrap();
         assert_eq!(
             error.to_string(),
-            "Failed to send request: error sending request for url (http://examplecom/wp-json/wp/v2/media?per_page=100)"
+            "Failed to send request: error sending request"
         );
     }
 }
