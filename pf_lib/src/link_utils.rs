@@ -24,19 +24,19 @@ pub fn build_url_from_config(config: &FinderConfig) -> Result<String, Box<dyn Er
             FinderTarget::Media => "media",
         },
         match &config.before {
-            Some(value) => format!("&before={}", value),
+            Some(value) => format!("&before={value}"),
             None => String::new(),
         },
         match &config.modified_before {
-            Some(value) => format!("&modified_before={}", value),
+            Some(value) => format!("&modified_before={value}"),
             None => String::new(),
         },
         match &config.after {
-            Some(value) => format!("&after={}", value),
+            Some(value) => format!("&after={value}"),
             None => String::new(),
         },
         match &config.modified_after {
-            Some(value) => format!("&modified_after={}", value),
+            Some(value) => format!("&modified_after={value}"),
             None => String::new(),
         },
         if !&config.exclude.is_empty() {
