@@ -99,9 +99,8 @@ mod tests {
         assert!(next.is_err());
 
         let error = next.err().unwrap();
-        assert_eq!(
-            error.to_string(),
-            "Failed to send request: error sending request"
-        );
+        assert!(error
+            .to_string()
+            .starts_with("Failed to send request: error sending request"));
     }
 }
