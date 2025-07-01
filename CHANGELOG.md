@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## `pf_lib` - [0.1.9](https://github.com/petit-chat/petit-filou/compare/pf_lib-v0.1.8...pf_lib-v0.1.9) - 2025-07-01
+
+### Fixed
+- tests and lint ([#47](https://github.com/petit-chat/petit-filou/pull/47))
+
 ## `pf_lib` - [0.1.8](https://github.com/petit-chat/petit-filou/compare/pf_lib-v0.1.7...pf_lib-v0.1.8) - 2025-07-01
 
 ### Other
