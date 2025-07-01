@@ -15,7 +15,7 @@ jobs:
     if: github.event.pull_request.user.login == 'dependabot[bot]' || (github.event.pull_request.user.login == 'petit-chat' && startsWith(github.event.pull_request.head.ref, 'release-plz-'))
     steps:
       - name: Auto-merge Dependabot and release-plz PRs
-        run: gh pr merge ${{ github.event.pull_request.number }} --auto -s
+        run: gh pr merge ${{ github.event.pull_request.html_url }} --auto -s
         env:
           # Use custom token here to allow triggering other
           # pipelines (e.g. binary builds) after merge.

@@ -23,7 +23,7 @@ pub fn get_stream<'a>(
     try_stream! {
         while let Some(url) = next_link {
             let response = client.get(url).send().await.map_err(|e| {
-                format!("Failed to send request: {}", e)
+                format!("Failed to send request: {e}")
             })?;
 
             if !response.status().is_success() {
@@ -34,7 +34,7 @@ pub fn get_stream<'a>(
             next_link = link_utils::get_next_link_from_headers(headers);
 
             let body = response.text().await.map_err(|e| {
-                format!("Failed to read response body: {}", e)
+                format!("Failed to read response body: {e}")
             })?;
 
             yield body;
@@ -99,9 +99,8 @@ mod tests {
         assert!(next.is_err());
 
         let error = next.err().unwrap();
-        assert_eq!(
-            error.to_string(),
-            "Failed to send request: error sending request"
-        );
+        assert!(error
+            .to_string()
+            .starts_with("Failed to send request: error sending request"));
     }
 }

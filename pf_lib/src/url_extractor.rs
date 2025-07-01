@@ -128,14 +128,8 @@ impl Xtract {
 
                 Some(SUPPORTED_MIME_TYPES.iter().flat_map(move |(ext, _)| {
                     [
-                        format!(
-                            "{}/wp-content/uploads/{}/{}/{}.{}",
-                            base_url, year, month, slug, ext
-                        ),
-                        format!(
-                            "{}/blog/wp-content/uploads/{}/{}/{}.{}",
-                            base_url, year, month, slug, ext
-                        ),
+                        format!("{base_url}/wp-content/uploads/{year}/{month}/{slug}.{ext}"),
+                        format!("{base_url}/blog/wp-content/uploads/{year}/{month}/{slug}.{ext}"),
                     ]
                 }))
             })
